@@ -1,5 +1,4 @@
 package org.wit.musiczone.activities
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,7 +8,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import org.wit.musiczone.R
 import org.wit.musiczone.data.ProvincePoint
 import org.wit.musiczone.data.provincePointMap
@@ -51,7 +49,6 @@ class MusicMapActivity : AppCompatActivity() {
             showAllLitProvinces()
         }
 
-        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val savedLocation = locationRepository.getLastLocation()
         if (savedLocation != null) {
             Timber.i("Location：${savedLocation.province} ${savedLocation.city}")
@@ -65,11 +62,6 @@ class MusicMapActivity : AppCompatActivity() {
             moveCharacterToProvince(savedLocation.province)
 
             showProvinceMarker(savedLocation.province)
-
-            locationRepository.saveSavedLocationToFirebase(
-                userId = uid, // 以后换成 FirebaseAuth 的 uid
-                location = savedLocation
-            )
 
             updateLitCount()
         }
