@@ -80,8 +80,7 @@ class MusicMapActivity : AppCompatActivity() {
         }
 
         backButton.setOnClickListener {
-            val intent = Intent(this, StyleActivity::class.java)
-            startActivity(intent)
+            finish() //
         }
     }
 
