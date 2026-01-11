@@ -1,2 +1,2 @@
 ## MUSIC ZONE
-lib:glide gif
+Music Zone is an Android - based music application, designed to provide users with an immersive and interactive music experience.
