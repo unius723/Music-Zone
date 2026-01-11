@@ -39,9 +39,9 @@ android {
     }
     signingConfigs {
         create("release") {
-            storeFile = file("../map.jks")
+            storeFile = file("D:/Android/musiczone/GenerateAPK.jks")
             storePassword = "123456"
-            keyAlias = "map"
+            keyAlias = "GenerateAPK"
             keyPassword = "123456"
         }
         getByName("debug") {
