@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Read external storage (used for scanning local music files, Android 12 and below) -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- Android 13+ permission for accessing audio media files -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+
+    <!-- Normal permissions (no runtime request required) -->
+
+    <!-- Access network state (used to determine connectivity and carrier info) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <!-- Access Wi-Fi network information (used for network-based location) -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <!-- Change Wi-Fi state (used to assist network-based location) -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+
+    <!-- Allow changing device configuration -->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+
+    <!-- Allow network access -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Keep CPU awake (used for background location or long-running tasks) -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- Dangerous permissions (runtime permission required) -->
+
+    <!-- Access approximate location (network-based location) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <!-- Access precise location (GPS-based location) -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <!-- Access additional location commands (improves GPS performance) -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+
+    <!-- Modify system settings (requires user approval via system settings) -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+
+    <!-- Foreground service permission (required for foreground location service, Android 9+) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <!-- Background location access (required on Android 10+ when accessing location in background) -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+
+    <!-- Write external storage (Android 9 and below) -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <!-- Foreground service permission for location (Android 12+) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION"/>
+
+
+    <application
+        android:name=".main.MainApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MusicZone">
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="de10c45b9171ad41e4e69107b82a93ca"/>
+
+        <service
+            android:name="com.amap.api.location.APSService"
+            android:foregroundServiceType="location" />
+
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.ChooseStyleActivity" />
+        <activity android:name=".activities.StyleActivity" />
+        <activity android:name=".activities.MusicPlayerActivity" />
+        <activity android:name=".activities.SearchActivity" />
+        <activity android:name=".activities.MusicListActivity" />
+        <activity android:name=".activities.FeedbackActivity" />
+        <activity android:name=".activities.MusicRecommendationActivity" />
+        <activity android:name=".activities.MusicMapActivity" />
+        <activity android:name=".activities.AmapLocationActivity" />
+        <activity android:name=".activities.AppInformationActivity" />
+        <activity android:name=".activities.GameActivity" />
+        <activity android:name=".activities.StartGameActivity" />
+        <activity android:name=".activities.GameOverActivity" />
+
+        <activity
+            android:name=".activities.StartActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

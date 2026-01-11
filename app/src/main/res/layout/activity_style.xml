@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rootLayout"
+    tools:context=".activities.StyleActivity">
+
+    <ImageView
+        android:id="@+id/top_banner"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:src="@drawable/background2"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Flow helper widget - references ImageViews by ID -->
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_icons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        app:flow_horizontalStyle="spread_inside"
+        app:flow_verticalAlign="center"
+        app:flow_wrapMode="chain"
+        app:flow_maxElementsWrap="10"
+        app:constraint_referenced_ids="icon_back,icon_change_style,icon_search,icon_display_room,icon_recommend,icon_listening,icon_map,icon_game,icon_report,icon_exit"
+        app:layout_constraintBottom_toBottomOf="@id/top_banner"
+        app:layout_constraintEnd_toEndOf="@id/top_banner"
+        app:layout_constraintStart_toStartOf="@id/top_banner"
+        app:layout_constraintTop_toTopOf="@id/top_banner" />
+
+    <!-- All ImageViews are now direct children of ConstraintLayout -->
+    <ImageView
+        android:id="@+id/icon_back"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/icon_back"
+        android:scaleType="fitCenter"
+        android:padding="8dp"
+        android:contentDescription="Back"/>
+
+    <ImageView
+        android:id="@+id/icon_change_style"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/icon_housestyle"
+        android:scaleType="fitCenter"
+        android:padding="8dp"
+        android:contentDescription="Change Style"/>
+
+    <ImageView
+        android:id="@+id/icon_search"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/icon_search"
+        android:scaleType="fitCenter"
+        android:padding="8dp"
+        android:contentDescription="Search"/>
+
+    <ImageView
+        android:id="@+id/icon_display_room"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/icon_display"
+        android:scaleType="fitCenter"
+        android:padding="8dp"
+        android:contentDescription="Display Room"/>
+
+    <ImageView
+        android:id="@+id/icon_recommend"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/icon_recommend"
+        android:scaleType="fitCenter"
+        android:padding="8dp"
+        android:contentDescription="Recommend"/>
+
+    <ImageView
+        android:id="@+id/icon_listening"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:contentDescription="Listening"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_listeninglist" />
+
+    <ImageView
+        android:id="@+id/icon_map"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/icon_map"
+        android:scaleType="fitCenter"
+        android:padding="8dp"
+        android:contentDescription="Map"/>
+
+    <ImageView
+        android:id="@+id/icon_game"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/icon_game"
+        android:scaleType="fitCenter"
+        android:padding="8dp"
+        android:contentDescription="Game"/>
+
+    <ImageView
+        android:id="@+id/icon_report"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/icon_report"
+        android:scaleType="fitCenter"
+        android:padding="8dp"
+        android:contentDescription="Report"/>
+
+    <ImageView
+        android:id="@+id/icon_exit"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/icon_more_exit"
+        android:scaleType="fitCenter"
+        android:padding="8dp"
+        android:contentDescription="Exit"/>
+
+    <VideoView
+        android:id="@+id/video_view_mv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_banner"
+        app:layout_constraintWidth_percent="0.211" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

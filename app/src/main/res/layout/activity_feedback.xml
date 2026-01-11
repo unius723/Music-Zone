@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Background GIF -->
+    <ImageView
+        android:id="@+id/backgroundGif"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Header Section -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Back Button -->
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/icon_back"
+            android:contentDescription="Back"
+            android:scaleType="fitCenter"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="0dp" />
+
+        <!-- Report Icon -->
+        <ImageView
+            android:id="@+id/reportIcon"
+            android:layout_width="60dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="0dp"
+            android:src="@drawable/icon_report"
+            android:contentDescription="Report"
+            android:scaleType="fitCenter"
+            android:padding="0dp" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="FEEDBACK"
+            android:textColor="@color/dark_blue"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/press_start_2p_regular"
+            android:letterSpacing="0.05"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+
+    <!-- Feedback Card -->
+    <FrameLayout
+        android:id="@+id/feedbackCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:background="@drawable/shadow_card"
+        android:elevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp">
+
+            <!-- Feedback Label -->
+            <TextView
+                android:id="@+id/feedbackLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YOUR FEEDBACK"
+                android:textColor="@color/dark_blue"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/press_start_2p_regular"
+                android:letterSpacing="0.05"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- Feedback Input -->
+            <EditText
+                android:id="@+id/feedbackEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:minHeight="200dp"
+                android:background="@drawable/bg_search_input"
+                android:padding="16dp"
+                android:hint="Enter your feedback here..."
+                android:textColorHint="@color/gray_placeholder"
+                android:textColor="@color/dark_blue"
+                android:textSize="12sp"
+                android:fontFamily="@font/press_start_2p_regular"
+                android:inputType="textMultiLine"
+                android:gravity="top|start"
+                android:maxLines="10"
+                android:scrollbars="vertical"
+                app:layout_constraintTop_toBottomOf="@id/feedbackLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Submit Button -->
+            <FrameLayout
+                android:id="@+id/submitButtonContainer"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/feedbackEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Shadow -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="#4D000000"
+                    android:elevation="0dp" />
+
+                <!-- Button -->
+                <Button
+                    android:id="@+id/submitButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_button_selector"
+                    android:text="SUBMIT"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/press_start_2p_regular"
+                    android:letterSpacing="0.05"
+                    android:elevation="0dp"
+                    android:stateListAnimator="@null" />
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

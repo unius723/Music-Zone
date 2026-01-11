@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="Dark_purple">#190032</color>
+    <!-- Pixel-style Music Zone Colors -->
+    <color name="pink">#FF6B9D</color>
+    <color name="cyan">#00D4FF</color>
+    <color name="purple">#C084FC</color>
+    <color name="dark_blue">#1A1A3E</color>
+    <color name="light_cyan">#ECFEFF</color>
+    <color name="light_pink">#FDF2F8</color>
+    <color name="gray_placeholder">#717182</color>
+    <color name="purple_border_alpha">#33503095</color>
+
+    <!-- Gradient colors -->
+    <color name="gradient_start_pink">#FF6B9D</color>
+    <color name="gradient_end_purple">#C084FC</color>
+    <color name="gradient_start_cyan">#00D4FF</color>
+    <color name="gradient_end_cyan">#5CE1E6</color>
+
+    <color name="purple_map">#FF511F6B</color>
+    <color name="light_blue">#FF33FFFF</color>
+
+</resources>

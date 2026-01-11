@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "289094638542",
+    "project_id": "musiczone-143ec",
+    "storage_bucket": "musiczone-143ec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289094638542:android:a67904f476e3146227a99f",
+        "android_client_info": {
+          "package_name": "org.wit.musiczone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvfJLDuVDPHCREVw7ofR67XB0Rlc-wwq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

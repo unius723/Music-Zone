@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/start"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.MainApp">
+
+
+    <ImageView
+        android:id="@+id/gifBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/musiczone_logo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/musiczone_logo"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintWidth_percent="0.46" />
+
+
+    <ImageView
+        android:id="@+id/musiczone_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/musiczone_progress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/loading_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:elevation="6dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="0"
+
+
+        android:progressDrawable="@drawable/progress_loading"
+        app:layout_constraintBottom_toBottomOf="@id/musiczone_progress"
+        app:layout_constraintEnd_toEndOf="@id/musiczone_progress"
+
+
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="@id/musiczone_progress"
+
+        app:layout_constraintTop_toTopOf="@id/musiczone_progress"
+
+        app:layout_constraintVertical_bias="0.49"
+        app:layout_constraintWidth_percent="0.563" />
+
+    <ImageButton
+        android:id="@+id/go_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:elevation="8dp"
+        android:scaleType="fitXY"
+
+        android:src="@drawable/musiczone_go"
+        android:enabled="false"
+        android:alpha="0.3"
+        app:layout_constraintBottom_toBottomOf="@id/musiczone_progress"
+        app:layout_constraintEnd_toEndOf="@id/musiczone_progress"
+        app:layout_constraintHorizontal_bias="0.99"
+
+
+        app:layout_constraintStart_toStartOf="@id/musiczone_progress"
+        app:layout_constraintTop_toTopOf="@id/musiczone_progress"
+
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintWidth_percent="0.1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
