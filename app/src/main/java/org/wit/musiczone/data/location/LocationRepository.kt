@@ -1,9 +1,6 @@
 package org.wit.musiczone.data.location
-
 import android.content.Context
 import com.amap.api.location.AMapLocation
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import java.io.File
 import com.google.firebase.firestore.FirebaseFirestore
 
