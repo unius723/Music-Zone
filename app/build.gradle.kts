@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.google.gms.google.services)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -18,8 +18,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["AMAP_KEY"] = "de10c45b9171ad41e4e69107b82a93ca"
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -27,6 +27,28 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
+        }
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    signingConfigs {
+        create("release") {
+            storeFile = file("D:/Android/musiczone/GenerateAPK.jks")
+            storePassword = "123456"
+            keyAlias = "GenerateAPK"
+            keyPassword = "123456"
+        }
+        getByName("debug") {
+            storeFile = file("../map.keystore")
+            storePassword = "123456"
+            keyAlias = "map"
+            keyPassword = "123456"
         }
     }
     compileOptions {
@@ -39,8 +61,6 @@ android {
 }
 
 dependencies {
-    // Firebase BOM
-    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
 
@@ -49,7 +69,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.recyclerview)
     implementation(libs.glide)
     implementation(libs.timber)
     implementation(libs.kotlinx.coroutines.android)
@@ -57,5 +76,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("com.amap.api:map2d:6.0.0")
+    implementation("com.amap.api:location:6.4.9")
+
 
 }
