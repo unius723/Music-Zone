@@ -304,6 +304,20 @@ MusicZone Development Team
 For questions or suggestions, please contact us through:
 - Submit an Issue
 - Send feedback (in-app feedback feature)
+- Email: 1870499505@qq.com
+
+## 📄 Copyright
+
+**Copyright © MusicZone Development Team. All Rights Reserved.**
+
+This project and its source code are protected by copyright law. Unauthorized use, reproduction, distribution, or modification of this software is strictly prohibited without prior written permission from the copyright holders.
+
+**Terms of Use:**
+- This software is provided for educational and personal use only
+- Commercial use, distribution, or modification requires explicit authorization
+- Any unauthorized use may result in legal action
+
+For licensing inquiries, please contact the development team through the contact methods listed above.
 
 ---
 
