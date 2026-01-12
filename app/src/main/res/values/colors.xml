@@ -18,4 +18,7 @@
     <color name="gradient_end_purple">#C084FC</color>
     <color name="gradient_start_cyan">#00D4FF</color>
     <color name="gradient_end_cyan">#5CE1E6</color>
+
+    <color name="purple_map">#FF511F6B</color>
+    <color name="light_blue">#FF33FFFF</color>
 </resources>
