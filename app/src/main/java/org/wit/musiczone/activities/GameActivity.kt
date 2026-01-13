@@ -76,7 +76,6 @@ class GameActivity : AppCompatActivity() {
         }
         pauseMenu.findViewById<ImageButton>(R.id.icon_exit).setOnClickListener {
             finish()
-            startActivity(Intent(this, StartGameActivity::class.java))
         }
     }
 
