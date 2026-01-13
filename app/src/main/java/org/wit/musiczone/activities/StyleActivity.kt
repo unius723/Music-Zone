@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.widget.ImageView
 import android.widget.VideoView
@@ -13,132 +12,117 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import org.wit.musiczone.R
 
-class StyleActivity : AppCompatActivity() {
+class StyleActivity : AppCompatActivity(), StyleContract.View {
 
-    private lateinit var videoView: VideoView
+    private lateinit var presenter: StyleContract.Presenter
+    lateinit var videoView: VideoView
+    private var playbackPosition: Int = 0
+    private val PLAYBACK_POSITION_KEY = "VIDEO_PLAYBACK_POSITION"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        try {
-            setContentView(R.layout.activity_style)
+        setContentView(R.layout.activity_style)
 
-            // Set background based on intent
-            val style = intent.getStringExtra("style") ?: "Rock"
-            val rootLayout = findViewById<ConstraintLayout>(R.id.rootLayout)
-            val bgRes = when(style) {
-                "Rock" -> R.drawable.style_rock
-                "Classic" -> R.drawable.style_classic
-                "Electronic" -> R.drawable.style_electronic
-                "Chinese" -> R.drawable.style_chinese
-                else -> R.drawable.style_rock
-            }
-            rootLayout.setBackgroundResource(bgRes)
-
-            // Setup UI components
-            setupTopNavigation()
-            setupVideoPlayer()
-
-        } catch (e: Exception) {
-            Log.e("StyleActivity", "Error in onCreate: ${e.message}", e)
-            e.printStackTrace()
-            finish()
+        // Restore playback position after configuration change (e.g., rotation)
+        if (savedInstanceState != null) {
+            playbackPosition = savedInstanceState.getInt(PLAYBACK_POSITION_KEY, 0)
         }
+
+        presenter = StylePresenter(this)
+        videoView = findViewById(R.id.video_view_mv)
+
+        presenter.onViewCreated(intent)
+        setupTopNavigationListeners()
     }
 
-    private fun setupVideoPlayer() {
-        videoView = findViewById(R.id.video_view_mv)
-        val uri = Uri.parse("android.resource://$packageName/${R.raw.mv1}")
+    // #region View Interface Implementation
+    override fun setBackground(drawableResId: Int) {
+        findViewById<ConstraintLayout>(R.id.rootLayout).setBackgroundResource(drawableResId)
+    }
+
+    override fun playVideo(videoResId: Int) {
+        val uri = Uri.parse("android.resource://$packageName/$videoResId")
         videoView.setVideoURI(uri)
 
         val mediaController = MediaController(this)
         mediaController.setAnchorView(videoView)
         videoView.setMediaController(mediaController)
 
+        // This listener now ONLY prepares the player.
         videoView.setOnPreparedListener { mp ->
             mp.isLooping = true
             mp.setVolume(1.0f, 1.0f)
+            // If we have a saved position, seek to it now that the player is ready.
+            if (playbackPosition > 0) {
+                videoView.seekTo(playbackPosition)
+            } else {
+                videoView.start() // Start playback only if it's the very first run.
+            }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        videoView.start()
+    override fun adjustVideoPosition(horizontalBias: Float) {
+        val params = videoView.layoutParams as ConstraintLayout.LayoutParams
+        params.horizontalBias = horizontalBias
+        videoView.layoutParams = params
+    }
+
+    override fun navigateTo(intent: Intent) {
+        startActivity(intent)
+    }
+
+    override fun finishActivity() {
+        finish()
+    }
+    // #endregion
+
+    // #region Lifecycle and Listeners
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        // Save the current video position to handle configuration changes.
+        outState.putInt(PLAYBACK_POSITION_KEY, videoView.currentPosition)
     }
 
     override fun onPause() {
         super.onPause()
-        if (videoView.isPlaying) {
-            videoView.pause()
+        // Pause the video and save the current position.
+        playbackPosition = videoView.currentPosition
+        videoView.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Resume video playback from the saved position.
+        if (playbackPosition > 0) {
+            videoView.seekTo(playbackPosition)
         }
+        videoView.start() // This is now the primary entry point for starting/resuming playback.
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        videoView.stopPlayback() // Fully release video resources.
+        presenter.onDestroy()
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun setupTopNavigation() {
-        try {
-            findViewById<ImageView>(R.id.icon_back)?.setOnClickListener {
-                val intent = Intent(this, ChooseStyleActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-            
-            findViewById<ImageView>(R.id.icon_search)?.setOnClickListener {
-                val intent = Intent(this, SearchActivity::class.java)
-                startActivity(intent)
-            }
-            
-            findViewById<ImageView>(R.id.icon_change_style)?.setOnClickListener {
-                val intent = Intent(this, ChooseStyleActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-            
-            findViewById<ImageView>(R.id.icon_display_room)?.setOnClickListener {
-                // Display room functionality
-            }
-            
-            findViewById<ImageView>(R.id.icon_recommend)?.setOnClickListener {
-                val intent = Intent(this, MusicRecommendationActivity::class.java)
-                startActivity(intent)
-            }
+    private fun setupTopNavigationListeners() {
+        findViewById<ImageView>(R.id.icon_back).setOnClickListener { presenter.onBackClicked() }
+        findViewById<ImageView>(R.id.icon_search).setOnClickListener { presenter.onSearchClicked() }
+        findViewById<ImageView>(R.id.icon_change_style).setOnClickListener { presenter.onChangeStyleClicked() }
+        findViewById<ImageView>(R.id.icon_display_room).setOnClickListener { presenter.onDisplayRoomClicked() }
+        findViewById<ImageView>(R.id.icon_recommend).setOnClickListener { presenter.onRecommendClicked() }
+        findViewById<ImageView>(R.id.icon_map).setOnClickListener { presenter.onMapClicked() }
+        findViewById<ImageView>(R.id.icon_listening).setOnClickListener { presenter.onListeningClicked() }
+        findViewById<ImageView>(R.id.icon_game).setOnClickListener { presenter.onGameClicked() }
+        findViewById<ImageView>(R.id.icon_report).setOnClickListener { presenter.onReportClicked() }
 
-            findViewById<ImageView>(R.id.icon_map)?.setOnClickListener {
-                val intent = Intent(this, AmapLocationActivity::class.java)
-                startActivity(intent)
+        findViewById<ImageView>(R.id.icon_exit).setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                presenter.onExitTouched(event.x, v.width)
             }
-
-            findViewById<ImageView>(R.id.icon_listening)?.setOnClickListener {
-                val intent = Intent(this, MusicPlayerActivity::class.java)
-                startActivity(intent)
-            }
-
-            findViewById<ImageView>(R.id.icon_game)?.setOnClickListener {
-                val intent = Intent(this, StartGameActivity::class.java)
-                startActivity(intent)
-            }
-            
-            findViewById<ImageView>(R.id.icon_report)?.setOnClickListener {
-                val intent = Intent(this, FeedbackActivity::class.java)
-                startActivity(intent)
-            }
-
-            findViewById<ImageView>(R.id.icon_exit).setOnTouchListener { v, event ->
-                if (event.action == MotionEvent.ACTION_UP) {
-                    val x = event.x
-                    val width = v.width
-                    if (x < width / 2) {
-                        startActivity(Intent(this, AppInformationActivity::class.java))
-                    } else {
-                        startActivity(Intent(this, StartActivity::class.java))
-                        finish()
-                    }
-                }
-                true
-            }
-
-
-        } catch (e: Exception) {
-            Log.e("StyleActivity", "Error in setupTopNavigation: ${e.message}", e)
-            e.printStackTrace()
+            true
         }
     }
+    // #endregion
 }
